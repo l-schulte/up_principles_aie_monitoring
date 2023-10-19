@@ -19,12 +19,6 @@ Bootstrap OpenTelemetry:
 opentelemetry-bootstrap -a install
 ```
 
-Start the metric servers through docker-compose:
-
-```
-sudo docker-compose up
-```
-
 Start the sample application:
 
 ```

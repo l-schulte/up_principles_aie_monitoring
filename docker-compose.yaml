@@ -27,13 +27,12 @@ services:
     volumes:
       - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
       - prom_data:/prometheus
-
-  grafana:
-    image: grafana/grafana-oss
-    container_name: grafana
-    restart: unless-stopped
-    # ports:
-    #   - "3000:3000"
+  # grafana:
+  #   image: grafana/grafana-oss
+  #   container_name: grafana
+  #   restart: unless-stopped
+  #   ports:
+  #     - "3000:3000"
 
 volumes:
   prom_data:
