@@ -1,0 +1,1 @@
+opentelemetry-instrument flask run -p 8080

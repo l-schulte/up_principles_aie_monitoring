@@ -1,0 +1,25 @@
+# /tmp/otel-collector-config.yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+exporters:
+  # NOTE: Prior to v0.86.0 use `logging` instead of `debug`.
+  debug:
+    verbosity: detailed
+  # Data sources: metrics
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    namespace: default
+processors:
+  batch:
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [debug]
+      processors: [batch]
+    metrics:
+      receivers: [otlp]
+      exporters: [debug, prometheus]
+      processors: [batch]
