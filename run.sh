@@ -1,1 +1,1 @@
-opentelemetry-instrument flask run -p 8080
+opentelemetry-instrument --service_name group_test --exporter_otlp_protocol http/protobuf --exporter_otlp_endpoint "http://sample-otel.data-sci.fi" flask run -p 8080
