@@ -28,7 +28,11 @@ sudo docker-compose up
 Start the sample application:
 
 ```
-opentelemetry-instrument flask run -p 8080
+opentelemetry-instrument \
+    --service_name "your-group" \
+    --exporter_otlp_protocol http/protobuf \
+    --exporter_otlp_endpoint "your-url" \
+    flask run -p 8080
 ```
 
 ___
