@@ -13,24 +13,8 @@ Install python dependencies:
 pip install -r requirements.txt
 ```
 
-Bootstrap OpenTelemetry:
-
-```
-opentelemetry-bootstrap -a install
-```
-
-Start the metric servers through docker-compose:
-
-```
-sudo docker-compose up
-```
-
 Start the sample application:
 
 ```
-opentelemetry-instrument flask run -p 8080
+flask run
 ```
-
-___
-
-Example from [OpenTelemetry Getting Started](https://opentelemetry.io/docs/instrumentation/python/getting-started/)
