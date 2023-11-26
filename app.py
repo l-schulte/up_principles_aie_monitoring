@@ -1,32 +1,30 @@
-# These are the necessary import declarations
-from opentelemetry import trace
-from opentelemetry import metrics
-
 from random import randint
 from flask import Flask
 
-tracer = trace.get_tracer("diceroller.tracer")
-# Acquire a meter.
-meter = metrics.get_meter("diceroller.meter")
+from prometheus_client import Summary, Counter
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from prometheus_client import make_wsgi_app
 
-# Now create a counter instrument to make measurements with
-roll_counter = meter.create_counter(
-    "dice.rolls",
-    description="The number of rolls by roll value",
-)
 
 app = Flask(__name__)
 
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
+
+REQUEST_TIME = Summary('request_processing_seconds',
+                       'Time spent processing request')
+ROLL_COUNTER = Counter(
+    'roll_count', 'Number of tosses per value', ['value'])
+
 
 @app.route("/rolldice")
+@REQUEST_TIME.time()
 def roll_dice():
-    return str(roll())
+    return roll()
 
 
 def roll():
-    with tracer.start_as_current_span("roll") as rollspan:
-        res = randint(1, 6)
-        rollspan.set_attribute("roll.value", res)
-        # This adds 1 to the counter for the given roll value
-        roll_counter.add(1, {"roll.value": res})
-        return res
+    res = str(randint(1, 6))
+    ROLL_COUNTER.labels(res).inc()
+    return res
