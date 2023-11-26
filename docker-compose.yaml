@@ -7,7 +7,7 @@ services:
       args:
         - HOST=${HOST}
     volumes:
-      - ./config/prometheus_mod.yaml:/etc/prometheus/prometheus_mod.yml
+      - ./config:/etc/prometheus
 
   prometheus:
     image: prom/prometheus
