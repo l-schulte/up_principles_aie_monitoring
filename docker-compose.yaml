@@ -7,7 +7,7 @@ services:
       args:
         - HOST=${HOST}
     volumes:
-      - ./config:/etc/prometheus
+      - ./config/prometheus.yml:/prometheus.yml
 
   prometheus:
     image: prom/prometheus
@@ -19,7 +19,7 @@ services:
     #   - 9090:9090
     restart: unless-stopped
     volumes:
-      - ./config/prometheus_mood.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
       - prom_data:/prometheus
 
   grafana:
