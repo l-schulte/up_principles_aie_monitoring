@@ -6,8 +6,8 @@ services:
       dockerfile: replacer.dockerfile
       args:
         - HOST=${HOST}
-  volumes:
-    - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
+    volumes:
+      - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
 
   prometheus:
     image: prom/prometheus
