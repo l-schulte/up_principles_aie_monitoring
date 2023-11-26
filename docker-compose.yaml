@@ -20,7 +20,7 @@ services:
     #   - 9090:9090
     restart: unless-stopped
     volumes:
-      - /root/config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /root/config:/etc/prometheus
       - prom_data:/prometheus
 
   grafana:
