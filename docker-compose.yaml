@@ -6,8 +6,9 @@ services:
       dockerfile: replacer.dockerfile
       args:
         - HOST=${HOST}
+        - YAMLURL=${YAMLURL}
     volumes:
-      - ./config/prometheus.yml:/prometheus.yml
+      - ${PWD}/config/prometheus.yml:/prometheus.yml
 
   prometheus:
     image: prom/prometheus
@@ -19,7 +20,7 @@ services:
     #   - 9090:9090
     restart: unless-stopped
     volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ${PWD}/config/prometheus.yml:/etc/prometheus/prometheus.yml
       - prom_data:/prometheus
 
   grafana:
