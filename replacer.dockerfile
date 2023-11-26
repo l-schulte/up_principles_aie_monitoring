@@ -1,4 +1,5 @@
 FROM alpine:latest
 RUN apk add --no-cache sed
 ARG HOST
-RUN sed -i "s/##TARGET##/$HOST/g" "/etc/prometheus/prometheus.yml"
+COPY ./config/prometheus.yaml /etc/prometheus/prometheus_mod.yml
+RUN sed -i "s/##TARGET##/$HOST/g" "/etc/prometheus/prometheus_mod.yml"
