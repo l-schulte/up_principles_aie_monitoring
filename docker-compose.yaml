@@ -1,6 +1,16 @@
 services:
+  replacer:
+    build:
+      dockerfile: replacer.dockerfile
+      args:
+        - HOST=${HOST}
+  volumes:
+    - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
+
   prometheus:
     image: prom/prometheus
+    depends-on:
+      - replacer
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
     # ports:
