@@ -11,7 +11,7 @@ services:
 
   prometheus:
     image: prom/prometheus
-    depends-on:
+    depends_on:
       - replacer
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
